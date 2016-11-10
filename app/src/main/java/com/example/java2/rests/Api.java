@@ -1,5 +1,6 @@
 package com.example.java2.rests;
 
+import com.example.java2.rests.Model.CommentsResponse;
 import com.example.java2.rests.Model.User;
 import com.example.java2.rests.Model.UserResponse;
 
@@ -16,4 +17,7 @@ public interface Api {
 
     @GET("users?site=stackoverflow")
     Call<UserResponse> getUser(@Query("pagesize")int size,@Query("sort")String sort);
+
+    @GET("comments?site=stackoverflow")
+    Call<CommentsResponse> getComments(@Query("order")String order,@Query("sort")String votes,@Query("pagesize")int size,@Query("min")int min);
 }

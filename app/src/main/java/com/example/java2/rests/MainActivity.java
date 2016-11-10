@@ -4,6 +4,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ListView;
 
+import com.example.java2.rests.Model.Comment;
+import com.example.java2.rests.Model.CommentsResponse;
 import com.example.java2.rests.Model.User;
 import com.example.java2.rests.Model.UserResponse;
 
@@ -26,19 +28,19 @@ ListView gg;
     }
 
     private void init() {
-        RestClient.getApi().getUser(100,"reputation").enqueue(new Callback<UserResponse>() {
+        RestClient.getApi().getComments("desc","votes",10,3).enqueue(new Callback<CommentsResponse>() {
             @Override
-            public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
+            public void onResponse(Call<CommentsResponse> call, Response<CommentsResponse> response) {
                 if(response.isSuccessful()){
                     System.out.println("gogogog");
-                    ArrayList<User>go=(response.body().getItems());
+                    ArrayList<Comment>go=(response.body().getItems());
                     Adapter adapter=new Adapter(MainActivity.this,go);
                     gg.setAdapter(adapter);
                 }
             }
 
             @Override
-            public void onFailure(Call<UserResponse> call, Throwable t) {
+            public void onFailure(Call<CommentsResponse> call, Throwable t) {
 
             }
         });

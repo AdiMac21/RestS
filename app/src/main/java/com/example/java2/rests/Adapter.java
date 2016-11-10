@@ -8,11 +8,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.example.java2.rests.Model.User;
+import com.example.java2.rests.Model.Comment;
 
 import java.util.ArrayList;
-
-import static android.R.attr.data;
 
 /**
  * Created by java2 on 11/10/2016.
@@ -20,9 +18,9 @@ import static android.R.attr.data;
 
 public class Adapter extends BaseAdapter {
     Context context;
-    ArrayList<User> users;
+    ArrayList<Comment> users;
 
-    public Adapter(Context context, ArrayList<User> users) {
+    public Adapter(Context context, ArrayList<Comment> users) {
         this.context = context;
         this.users = users;
     }
@@ -44,7 +42,7 @@ public class Adapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        if(convertView==null){
+        if (convertView == null) {
 
             // inflate the layout
 
@@ -54,12 +52,12 @@ public class Adapter extends BaseAdapter {
 
         }
 
-        User objectItem = (User) getItem(position);
+        Comment objectItem = (Comment) getItem(position);
 
         TextView textViewItem = (TextView) convertView.findViewById(R.id.tv_text);
-
-        textViewItem.setText(position+"  "+objectItem.getDisplay_name());
-
+        TextView textView = (TextView) convertView.findViewById(R.id.score);
+        textViewItem.setText(position + "  " + users.get(position).getOwner().getDisplay_name());
+        textView.setText(Integer.toString(users.get(position).getScore()));
 
 
         return convertView;
