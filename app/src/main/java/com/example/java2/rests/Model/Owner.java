@@ -1,10 +1,12 @@
 package com.example.java2.rests.Model;
 
+import java.io.Serializable;
+
 /**
  * Created by java2 on 11/10/2016.
  */
 
-public class Owner {
+public class Owner implements Serializable {
     String display_name;
 
     public String getDisplay_name() {

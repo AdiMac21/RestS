@@ -6,9 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.java2.rests.Model.Comment;
+import com.example.java2.rests.Model.User;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -18,9 +20,9 @@ import java.util.ArrayList;
 
 public class Adapter extends BaseAdapter {
     Context context;
-    ArrayList<Comment> users;
+    ArrayList<User> users;
 
-    public Adapter(Context context, ArrayList<Comment> users) {
+    public Adapter(Context context, ArrayList<User> users) {
         this.context = context;
         this.users = users;
     }
@@ -41,7 +43,7 @@ public class Adapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
 
             // inflate the layout
@@ -52,14 +54,18 @@ public class Adapter extends BaseAdapter {
 
         }
 
-        Comment objectItem = (Comment) getItem(position);
 
         TextView textViewItem = (TextView) convertView.findViewById(R.id.tv_text);
-        TextView textView = (TextView) convertView.findViewById(R.id.score);
-        textViewItem.setText(position + "  " + users.get(position).getOwner().getDisplay_name());
-        textView.setText(Integer.toString(users.get(position).getScore()));
+        ImageView imageView = (ImageView) convertView.findViewById(R.id.imV);
+        Picasso.with(context)
+                .load(users.get(position).getProfile_image())
+                .resize(50, 50)
+                .centerCrop()
+                .into(imageView);
+        textViewItem.setText(position + "  " + users.get(position).getDisplay_name());
 
 
         return convertView;
     }
+
 }
